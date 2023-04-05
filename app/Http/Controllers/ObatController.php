@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Obat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 
 class ObatController extends Controller
@@ -54,7 +55,8 @@ class ObatController extends Controller
             'jenis' => 'required',
             'satuan' => 'required',
             'harga_jual' => 'required|numeric',
-            'stok' => 'required|numeric'
+            'stok' => 'required|numeric',
+            'gambar' => 'required|mimes:jpeg,jpg,png,gif'
         ], [
             'kode_obat.required' => 'Kode Obat Wajib Di Isi',
             'nama_obat.required' => 'Nama Obat Wajib Di Isi',
@@ -62,8 +64,16 @@ class ObatController extends Controller
             'jenis.required' => 'Jenis Wajib Di Isi',
             'satuan.required' => 'Satuan Wajib Di Isi',
             'harga_jual.required' => 'Harga Wajib Di Isi',
-            'stok.required' => 'Stok Wajib Di Isi'
+            'stok.required' => 'Stok Wajib Di Isi',
+            'gambar.required' => 'Gambar Wajib di isi',
+            'gambar.mimes' => 'Masukan Ekstensi file gambar dengan format, jpg, jpeg, png, dan gif.'
         ]);
+
+        $gambar = $request->file('gambar');
+        $gambar_eks = $gambar->extension();
+        $gambar_nama = date('ymdhis') . '.' . $gambar_eks;
+        $gambar->move(public_path('img'), $gambar_nama);
+
         $data = [
             'kode_obat' => $request->input('kode_obat'),
             'nama_obat' => $request->input('nama_obat'),
@@ -74,6 +84,8 @@ class ObatController extends Controller
             'kemasan' => $request->input('kemasan'),
             'harga_jual' => $request->input('harga_jual'),
             'stok' => $request->input('stok'),
+            'gambar' => $gambar_nama
+
         ];
         Obat::create($data);
         return redirect("obat")->with('success',"Data berhasil ditambahkan");
@@ -112,7 +124,57 @@ class ObatController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return 'test';
+        $request->validate([
+            'kode_obat' => 'required',
+            'nama_obat' => 'required',
+            'merk' => 'required',
+            'jenis' => 'required',
+            'satuan' => 'required',
+            'harga_jual' => 'required|numeric',
+            'stok' => 'required|numeric'
+        ], [
+            'kode_obat.required' => 'Kode Obat Wajib Di Isi',
+            'nama_obat.required' => 'Nama Obat Wajib Di Isi',
+            'merk.required' => 'Merk Wajib Di Isi',
+            'jenis.required' => 'Jenis Wajib Di Isi',
+            'satuan.required' => 'Satuan Wajib Di Isi',
+            'harga_jual.required' => 'Harga Wajib Di Isi',
+            'stok.required' => 'Stok Wajib Di Isi'
+        ]);
+
+        if ($request->hasFile('gambar')) {
+            $request->validate([
+                'gambar' => 'mimes:jpeg,jpg,png,gif'
+            ], [
+                'gambar.mimes' => 'Masukan Ekstensi file gambar dengan format, jpg, jpeg, png, dan gif.'
+            ]);
+
+            //uplad image baru
+            $gambar = $request->file('gambar');
+            $gambar_eks = $gambar->extension();
+            $gambar_nama = date('ymdhis') . '.' . $gambar_eks;
+            $gambar->move(public_path('img'), $gambar_nama);
+
+            //delete image lama
+            $data = Obat::where('id', $id)->first();
+            File::delete(public_path('img') . '/' . $data->gambar);
+        }
+
+        $data = [
+            'kode_obat' => $request->input('kode_obat'),
+            'nama_obat' => $request->input('nama_obat'),
+            'merk' => $request->input('merk'),
+            'jenis' => $request->input('jenis'),
+            'satuan' => $request->input('satuan'),
+            'golongan' => $request->input('golongan'),
+            'kemasan' => $request->input('kemasan'),
+            'harga_jual' => $request->input('harga_jual'),
+            'stok' => $request->input('stok'),
+            'gambar' => $gambar_nama
+        ];
+
+        Obat::where('id',$id)->update($data);
+        return redirect("obat")->with('success', "Data berhasil diubah");
     }
 
     /**
@@ -123,7 +185,10 @@ class ObatController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Obat::where('id', $id)->first();
+        File::delete(public_path('img').'/'.$data->gambar);
+        Obat::where('id', $id)->delete();
+        return redirect("obat")->with('success', "Data berhasil dihapus");
     }
     
 }

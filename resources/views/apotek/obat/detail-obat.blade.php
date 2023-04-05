@@ -122,7 +122,10 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-end">
-                        <a href="{{route("ubah-obat",$obat->id)}}">
+                        <a href="{{route("obat")}}" class="px-2">
+                        <button type="submit" class="btn btn-secondary btn-md mt-4 mb-4">  {{ 'Kembali' }}</button>
+                        </a>
+                        <a href="{{route("ubah-obat",$obat->id)}}" class="px-2">
                         <button type="submit" class="btn bg-gradient-dark btn-md mt-4 mb-4">  {{ 'Edit' }}</button>
                         </a>
                     </div>
@@ -140,7 +143,7 @@
               <div class="row">
                  <div class="col-auto">
                     <div class="card card-blog card-plain">
-                        <img src="../assets/img/bruce-mars.jpg" alt="..." class="w-100 border-radius-lg shadow-sm">
+                        <img src="{{url('img').'/'.$obat->gambar}}" alt="..." class="w-100 border-radius-lg ">
                     </div>
                 </div>
             </div>

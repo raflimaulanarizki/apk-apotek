@@ -45,7 +45,7 @@ Route::group(['middleware' => 'auth'], function () {
 	})->name('rtl');
 
 	Route::get('user-management', function () {
-		return view('laravel-examples/user-management');
+		return view('apotek.user.user-management');
 	})->name('user-management');
 
 	Route::get('tables', function () {
@@ -73,11 +73,13 @@ Route::group(['middleware' => 'auth'], function () {
 
 	//APOTEK
 	Route::resource('detail-obat', ObatController::class);
+	Route::resource('obat', ObatController::class);
 
 	Route::get('obat', [ObatController::class, 'index'])->name('obat');
 	Route::get('detail-obat/{id}', [ObatController::class, 'show'])->name('detail-obat');
 	Route::get('ubah-obat/{id}', [ObatController::class, 'edit'])->name('ubah-obat');
-	// Route::get('create', [ObatController::class, 'create'])->name('tambah-obat');
+
+	Route::get('user', [ObatController::class, 'index'])->name('obat');
 
 
 });
