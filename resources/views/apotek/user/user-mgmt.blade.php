@@ -57,7 +57,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                                                @php
+                                @php
                                 $i = 1
                                 @endphp
                                 @foreach ($user as $usr)

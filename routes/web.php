@@ -73,17 +73,21 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('obat', ObatController::class);
 
 	Route::get('obat', [ObatController::class, 'index'])->name('obat');
+	Route::delete('obat', [ObatController::class, 'destroy']);
 	Route::get('detail-obat/{id}', [ObatController::class, 'show'])->name('detail-obat');
 	Route::get('ubah-obat/{id}', [ObatController::class, 'edit'])->name('ubah-obat');
-
-	// Route::resource('user', ObatController::class);
 
 	Route::get('user', [UserController::class, 'index'])->name('user');
 	Route::post('user', [UserController::class, 'store']);
 	Route::put('user', [UserController::class, 'update']);
+	Route::delete('user/{id}', [UserController::class, 'destroy']);
+
+	// Route::resource('distributor', ObatController::class);
 
 	Route::get('distributor', [DistributorController::class, 'index'])->name('distributor');
 	Route::post('distributor', [DistributorController::class, 'store']);
+	Route::delete('distributor/{id}', [DistributorController::class, 'destroy']);
+
 
 
 

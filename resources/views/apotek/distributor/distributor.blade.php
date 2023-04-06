@@ -54,16 +54,15 @@
                       <td class="align-middle text-center">
                           <h6 class="text-xs font-weight-bold mb-0">{{$dst->notelepon}}</h6>
                       </td>
-                      
                                     <td class="text-center">
-                                      {{-- <div class="row"> --}}
-                                          {{-- <a href="{{route("ubah-obat",$obt->id)}}" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit Obat"> --}}
-                                            <i class="fas fa-edit text-secondary"></i>
-                                        </a>
-                                        {{-- @include('apotek.obat.hapus-obat') --}}
-                                        {{-- </div> --}}
+                                            <i class="fas fa-edit text-secondary cursor-pointer" data-bs-toggle="modal" data-bs-target="#ubahUser"></i>
+
+                                <form action="{{url('distributor/'.$dst->id)}}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                <button type="submit" style="padding: 0; border: none; background: none;" class="cursor-pointer fas fa-trash text-secondary">
+                                </form>
                                     </td>
-                        
                     </tr>
                     @endforeach
                   </tbody>

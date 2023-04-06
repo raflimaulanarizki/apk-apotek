@@ -44,12 +44,14 @@ class DistributorController extends Controller
         $request->validate([
             'name' => 'required',
             'alamat' => 'required',
-            'notelepon' => 'required|numeric',
+            'notelepon' => 'required|numeric|min:9',
         ], [
             'name.required' => 'Nama Distributor Wajib Di Isi',
             'alamat.required' => 'Alamat Wajib Di Isi',
             'notelepon.required' => 'No Telepon Wajib Di Isi',
-            'notelepon.numeric' => 'No Telpon harus angka'
+            'notelepon.numeric' => 'No Telpon harus angka',
+            'notelepon.min' => 'Minumum No Telpon 9 karakter'
+
         ]);
 
         $data = [
@@ -104,6 +106,7 @@ class DistributorController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Distributor::where('id', $id)->delete();
+        return redirect("distributor")->with('success', "Data berhasil dihapus");
     }
 }

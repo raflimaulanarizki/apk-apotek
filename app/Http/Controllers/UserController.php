@@ -149,6 +149,6 @@ class UserController extends Controller
     public function destroy($id)
     {
         User::where('id', $id)->delete();
-        return redirect("obat")->with('success', "Data berhasil dihapus");
+        return redirect("user")->with('success', "Data berhasil dihapus");
     }
 }
