@@ -55,7 +55,7 @@
                           <h6 class="text-xs font-weight-bold mb-0">{{$dst->notelepon}}</h6>
                       </td>
                                     <td class="text-center">
-                                            <i class="fas fa-edit text-secondary cursor-pointer" data-bs-toggle="modal" data-bs-target="#ubahUser"></i>
+                                            <i class="fas fa-edit text-secondary cursor-pointer" data-bs-toggle="modal" data-bs-target="#ubahDistributor"></i>
 
                                 <form action="{{url('distributor/'.$dst->id)}}" method="post">
                                     @csrf
@@ -74,6 +74,7 @@
       </div>
     </div>
     @include('apotek.distributor.tambah-distributor')
+    @include('apotek.distributor.ubah-distributor')
   </main>
   
 

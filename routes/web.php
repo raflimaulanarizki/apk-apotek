@@ -79,13 +79,14 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('user', [UserController::class, 'index'])->name('user');
 	Route::post('user', [UserController::class, 'store']);
-	Route::put('user', [UserController::class, 'update']);
+	Route::put('user/{id}', [UserController::class, 'update'])->name('user-update');
 	Route::delete('user/{id}', [UserController::class, 'destroy']);
 
 	// Route::resource('distributor', ObatController::class);
 
 	Route::get('distributor', [DistributorController::class, 'index'])->name('distributor');
 	Route::post('distributor', [DistributorController::class, 'store']);
+	Route::put('distributor/{id}', [DistributorController::class, 'update'])->name('distributor-update');
 	Route::delete('distributor/{id}', [DistributorController::class, 'destroy']);
 
 

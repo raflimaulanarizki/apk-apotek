@@ -124,6 +124,8 @@ class UserController extends Controller
             ]);
 
             $password = Hash::make($request->input('password'));
+        }else {
+            $password = User::select('password')->where('id', $id)->first()->password;
         }
         $data = [
             'name' => $request->input('name'),
@@ -134,10 +136,7 @@ class UserController extends Controller
         ];
 
         User::where('id', $id)->update($data);
-        return redirect("obat")->with('success', "Data berhasil diubah");
-
-        // $nama = User::where('name', $id);
-        // return $nama;
+        return redirect("user")->with('success', "Data berhasil diubah");
     }
 
     /**

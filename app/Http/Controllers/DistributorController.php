@@ -95,7 +95,26 @@ class DistributorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'alamat' => 'required',
+            'notelepon' => 'required|numeric|min:9',
+        ], [
+            'name.required' => 'Nama Distributor Wajib Di Isi',
+            'alamat.required' => 'Alamat Wajib Di Isi',
+            'notelepon.required' => 'No Telepon Wajib Di Isi',
+            'notelepon.numeric' => 'No Telpon harus angka',
+            'notelepon.min' => 'Minumum No Telpon 9 karakter'
+
+        ]);
+        $data = [
+            'nama_distributor' => $request->input('name'),
+            'alamat' => $request->input('alamat'),
+            'notelepon' => $request->input('notelepon'),
+        ];
+
+        Distributor::where('id', $id)->update($data);
+        return redirect("distributor")->with('success', "Data berhasil diubah");
     }
 
     /**

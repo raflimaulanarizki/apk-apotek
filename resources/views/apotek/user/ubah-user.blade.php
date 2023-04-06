@@ -7,9 +7,9 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
- <form method="post"  action="{{url("user")}}" class=" px-3 rounded">
+ <form method="post"  action="{{url('user/'.$usr->id)}}" class=" px-3 rounded">
   @csrf
-
+  @method('put')
                             <div class="col-md-12">
                                <div class="form-group">
                                 <label for="name" class="form-label">Nama</label>
