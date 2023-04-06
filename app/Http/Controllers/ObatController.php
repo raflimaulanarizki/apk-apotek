@@ -157,8 +157,8 @@ class ObatController extends Controller
             //delete image lama
             $data = Obat::where('id', $id)->first();
             File::delete(public_path('img') . '/' . $data->gambar);
-        }else {
-            $gambar_nama = Obat::where('gambar', $id)->first();
+        } else {
+            $gambar_nama = Obat::select('gambar')->where('id', $id)->first()->gambar;
         }
 
         $data = [
