@@ -85,7 +85,6 @@ class ObatController extends Controller
             'harga_jual' => $request->input('harga_jual'),
             'stok' => $request->input('stok'),
             'gambar' => $gambar_nama
-
         ];
         Obat::create($data);
         return redirect("obat")->with('success',"Data berhasil ditambahkan");
@@ -158,6 +157,8 @@ class ObatController extends Controller
             //delete image lama
             $data = Obat::where('id', $id)->first();
             File::delete(public_path('img') . '/' . $data->gambar);
+        }else {
+            $gambar_nama = Obat::where('gambar', $id)->first();
         }
 
         $data = [

@@ -5,13 +5,15 @@ use App\Models\Obat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ObatController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Password;
 use App\Http\Controllers\ResetController;
 use App\Http\Controllers\InfoUserController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ChangePasswordController;
-use App\Http\Controllers\ObatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,9 +30,7 @@ use App\Http\Controllers\ObatController;
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/', [HomeController::class, 'home']);
-	Route::get('dashboard', function () {
-		return view('dashboard');
-	})->name('dashboard');
+	Route::get('dashboard',	[DashboardController::class, 'index'])->name('dashboard');
 
 	Route::get('billing', function () {
 		return view('billing');
@@ -43,10 +43,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('rtl', function () {
 		return view('rtl');
 	})->name('rtl');
-
-	Route::get('user-management', function () {
-		return view('apotek.user.user-management');
-	})->name('user-management');
 
 	Route::get('tables', function () {
 		return view('tables');
@@ -79,7 +75,15 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('detail-obat/{id}', [ObatController::class, 'show'])->name('detail-obat');
 	Route::get('ubah-obat/{id}', [ObatController::class, 'edit'])->name('ubah-obat');
 
-	Route::get('user', [ObatController::class, 'index'])->name('obat');
+	// Route::resource('user', ObatController::class);
+
+	Route::get('user', [UserController::class, 'index'])->name('user');
+	Route::post('user', [UserController::class, 'store']);
+	Route::put('user', [UserController::class, 'update']);
+
+
+	// Route::get('user-management', [UserController::class, 'index'])->name('user-management');
+
 
 
 });

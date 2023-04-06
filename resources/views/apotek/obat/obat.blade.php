@@ -17,7 +17,7 @@
                           {{(Session::get('success'))}}
                       </div>
                     @endif
-                    {{-- @include('apotek.alert.alert-obat') --}}
+                    @include('apotek.alert.alert')
                 </div>
                 
             <div class="card-body px-0 pt-0 pb-2">
@@ -49,7 +49,7 @@
                             <img src="{{url('img').'/'.$obt->gambar}}" class="avatar avatar-sm me-3" alt="user1">
                           </div>
                           <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm"><a href="{{route("detail-obat",$obt->id)}}">{{$obt->nama_obat}}</a></h6>
+                            <h6 class="mb-0 text-sm cursor-pointer"><a href="{{route("detail-obat",$obt->id)}}">{{$obt->nama_obat}}</a></h6>
                           </div>
                         </div>
                       </td>
@@ -71,10 +71,7 @@
                                           <a href="{{route("ubah-obat",$obt->id)}}" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit Obat">
                                             <i class="fas fa-edit text-secondary"></i>
                                         </a>
-                                        
-                                       
                                         @include('apotek.obat.hapus-obat')
-                                        
                                         {{-- </div> --}}
                                     </td>
                         
