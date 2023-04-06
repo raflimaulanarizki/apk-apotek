@@ -6,6 +6,7 @@ use App\Models\Obat;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Distributor;
 
 class DashboardController extends Controller
 {
@@ -18,9 +19,11 @@ class DashboardController extends Controller
     {
         $obat = Obat::count();
         $user = User::count();
+        $dist = Distributor::count();
         $data = [
             'obat' => $obat,
-            'user' => $user
+            'user' => $user,
+            'distributor' => $dist
         ];
         return view('dashboard')->with('data', $data);
     }

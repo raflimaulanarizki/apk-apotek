@@ -53,7 +53,7 @@
               <div class="numbers">
                 <p class="text-sm mb-0 text-capitalize font-weight-bold">Data Distributor</p>
                 <h5 class="font-weight-bolder mb-0">
-                  +3,462
+                  {{$data['distributor']}}
                 </h5>
               </div>
             </div>

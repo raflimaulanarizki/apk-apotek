@@ -10,7 +10,7 @@
                         <div>
                             <h5 class="mb-0">Data Distributor</h5>
                         </div>
-                        <button type="button" class="btn bg-gradient-primary btn-sm mb-0" data-bs-toggle="modal" data-bs-target="#newObat">+&nbsp; Tambah Distributor</button>
+                        <button type="button" class="btn bg-gradient-primary btn-sm mb-0" data-bs-toggle="modal" data-bs-target="#newDistributor">+&nbsp; Tambah Distributor</button>
                     </div>
                     @if (Session::get('success'))
                       <div class="alert alert-success mt-1" role="alert">
@@ -27,8 +27,8 @@
                     <tr>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Nama Distributor</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">alamat</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">notelpon</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Alamat</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No Telepon</th>
                       <th class="text-secondary opacity-7"></th>
                     </tr>
                   </thead>
@@ -52,7 +52,7 @@
                           <h6 class="text-xs font-weight-bold mb-0">{{$dst->alamat}}</h6>
                       </td>
                       <td class="align-middle text-center">
-                          <h6 class="text-xs font-weight-bold mb-0">{{$dst->notelpon}}</h6>
+                          <h6 class="text-xs font-weight-bold mb-0">{{$dst->notelepon}}</h6>
                       </td>
                       
                                     <td class="text-center">
@@ -60,7 +60,7 @@
                                           {{-- <a href="{{route("ubah-obat",$obt->id)}}" class="mx-3" data-bs-toggle="tooltip" data-bs-original-title="Edit Obat"> --}}
                                             <i class="fas fa-edit text-secondary"></i>
                                         </a>
-                                        @include('apotek.obat.hapus-obat')
+                                        {{-- @include('apotek.obat.hapus-obat') --}}
                                         {{-- </div> --}}
                                     </td>
                         
@@ -74,7 +74,7 @@
         </div>
       </div>
     </div>
-    @include('apotek.obat.tambah-obat')
+    @include('apotek.distributor.tambah-distributor')
   </main>
   
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Distributor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class DistributorController extends Controller
 {
@@ -36,7 +37,29 @@ class DistributorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Session::flash('name', $request->name);
+        Session::flash('alamat', $request->alamat);
+        Session::flash('notelepon', $request->notelepon);
+
+        $request->validate([
+            'name' => 'required',
+            'alamat' => 'required',
+            'notelepon' => 'required|numeric',
+        ], [
+            'name.required' => 'Nama Distributor Wajib Di Isi',
+            'alamat.required' => 'Alamat Wajib Di Isi',
+            'notelepon.required' => 'No Telepon Wajib Di Isi',
+            'notelepon.numeric' => 'No Telpon harus angka'
+        ]);
+
+        $data = [
+            'nama_distributor' => $request->input('name'),
+            'alamat' => $request->input('alamat'),
+            'notelepon' => $request->input('notelepon'),
+        ];
+
+        Distributor::create($data);
+        return redirect("distributor")->with('success', "Distributor berhasil ditambahkan");
     }
 
     /**

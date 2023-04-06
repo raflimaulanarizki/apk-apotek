@@ -82,7 +82,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('user', [UserController::class, 'store']);
 	Route::put('user', [UserController::class, 'update']);
 
-	Route::get('distributor', [DistributorController::class, 'index'])->name('user');
+	Route::get('distributor', [DistributorController::class, 'index'])->name('distributor');
+	Route::post('distributor', [DistributorController::class, 'store']);
+
 
 
 
