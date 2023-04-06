@@ -13,6 +13,7 @@ use App\Http\Controllers\InfoUserController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DistributorController;
 use App\Http\Controllers\ChangePasswordController;
 
 /*
@@ -80,6 +81,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('user', [UserController::class, 'index'])->name('user');
 	Route::post('user', [UserController::class, 'store']);
 	Route::put('user', [UserController::class, 'update']);
+
+	Route::get('distributor', [DistributorController::class, 'index'])->name('user');
+
 
 
 	// Route::get('user-management', [UserController::class, 'index'])->name('user-management');
